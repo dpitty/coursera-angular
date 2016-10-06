@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myFirstApp">
   <head>
     <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
     <title>Hello Coursera</title>
+    <style>body {font-size: 1.3em; }</style>
   </head>
   <body>
-    <h1>Hello Coursera Angular. Using Atom and browser sync is not bad.</h1>
+    <h1>My first AngularJS App...</h1>
+    <div ng-controller="MyFirstController">
+      {{sayHello()}}
+      <input type="text" ng-model="randomVar"></input> <!-- ng-model val looks for variable in $scope -->
+      <!-- How does ng-model="randomVar" aka $randomVar == "David" know to put "David" in the 'value' attribute? -->
+      The name you entered is {{randomVar}}
+      <p>Try <a href="nameCalculator.html">Namee Calculator</a> </p>
+    </div>
   </body>
 </html>

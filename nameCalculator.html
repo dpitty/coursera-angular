@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="nameCalculator.js"></script>
+    <script src="injections.js"></script>
+    <title>Name calculator</title>
+    <style>body {font-size: 1.3em; }</style>
+  </head>
+  <body>
+    <!--
+    <h1>Name calculator</h1>
+    <div ng-app="NameCalculator" ng-controller="NameCalculatorController">
+      <div>
+        Your name: <input type="text"
+          ng-model="name"
+          ng-keyup="displayNumeric();"></input>
+      </div>
+      <div>
+        Numeric value of your nameeee: {{totalValue}}
+      </div>
+    </div>
+  ONLY ONE APP PER PAGE FOR NOW? -->
+    <div ng-app="DIExample" ng-controller="DIController">
+      <input
+        ng-model="name"
+        ng-blur="toUpperCase();"></input>
+    </div>
+  </body>
+</html>
