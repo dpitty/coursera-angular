@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="dateParseApp">
+  <head>
+    <script src="angular.min.js"></script>
+    <script src="dateparser.js"></script>
+    <meta charset="utf-8">
+    <title>Date parser</title>
+  </head>
+  <body>
+    <h1>Date parser</h1>
+    <div ng-controller="dateParseController">
+      <input ng-model="inputDate" ng-change="fetchDate()" placeholder="Enter date here">
+      <br>Original: &nbsp; {{ inputDate }}
+      <br>Parsed date: &nbsp; {{ dateObj | date }}
+      <br>
+      <br>Year: &nbsp; {{ year }}
+      <br>Month: &nbsp; {{ month }}
+      <br>Day: &nbsp; {{ day }}
+    </div>
+  </body>
+</html>
