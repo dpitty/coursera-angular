@@ -31,25 +31,25 @@
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6" ng-controller="HitListController as toKill">
+    <div class="col-md-6" ng-controller="HitListController as targets">
      <h2>To Kill:</h2>
-     Enter a new target: <input ng-model="toKill.newTargetName" placeholder="Name">
-     <input ng-model="toKill.newTargetBounty" placeholder="Bounty (USD)">
-     <button ng-click="toKill.addTarget()">Add target</button>
+     Enter a new target: <input ng-model="targets.newTargetName" placeholder="Name">
+     <input ng-model="targets.newTargetBounty" placeholder="Bounty (USD)">
+     <button ng-click="targets.addTarget()">Add target</button>
      <ul>
-       <li ng-repeat="target in toKill.targetList"> {{ target.name }} : {{ target.bounty | currency }}
-         <button class="btn btn-default" ng-click="toKill.kill($index)"><span class="glyphicon glyphicon-ok"></span> Kill</button>
+       <li ng-repeat="target in targets.targetList"> {{ target.name }} : {{ target.bounty | currency }}
+         <button class="btn btn-default" ng-click="targets.kill($index)"><span class="glyphicon glyphicon-ok"></span> Kill</button>
        </li>
      </ul>
-     <div class="emptyMessage" ng-if="toKill.targetList.length === 0">You have no targets</div>
+     <div class="emptyMessage" ng-if="targets.targetList.length === 0">You have no targets</div>
     </div>
 
     <!-- Already Bought List -->
     <div class="col-md-6" ng-controller="KillBoardController as dead">
      <h2>Slaughtered:</h2>
-     <h4>Bounty income: {{ dead.sumBounty() | currency }};</h4>
+     <h4>Bounty income: {{ dead.getBountyIncome() | currency }};</h4>
      <ul>
-       <li ng-repeat="victim in dead.victimList"> {{victim.name}} ({{victim.bounty | currency}})
+       <li ng-repeat="victim in dead.killedList"> {{victim.name}} ({{victim.bounty | currency}})
        </li>
      </ul>
      <div class="emptyMessage" ng-if="dead.victimList.length === 0">No kills</div>
