@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Angular killing app</title>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>
+  </head>
+<body ng-app="KillingApp">
+  <div class="container">
+  <h1>Angular killing app</h1>
+
+  <div class="row">
+
+    <!-- To Buy List -->
+    <div class="col-md-6" ng-controller="HitListController as hitList">
+     <h2>To Kill:</h2>
+     Enter a new target: <input ng-model="hitList.newTargetName" placeholder="Name">
+     <input ng-model="hitList.newTargetBounty" placeholder="Bounty (USD)">
+     <button ng-click="hitList.addTarget()">Add target</button>
+     <ul>
+       <li ng-repeat="hit in hitList.toKill"> {{ hit.name }} : {{ hit.bounty | currency }}
+         <button class="btn btn-default" ng-click="hitList.selectKill($index); killBoard.sumBounty();"><span class="glyphicon glyphicon-ok"></span> Kill</button>
+       </li>
+     </ul>
+     <div class="emptyMessage" ng-if="hitList.toKill.length == 0">You have no targets</div>
+    </div>
+
+    <!-- Already Bought List -->
+    <div class="col-md-6" ng-controller="KillBoardController as killBoard">
+     <h2>Slaughtered:</h2>
+     <h4>Bounty income: {{ killBoard.sumBounty() | currency }};</h4>
+     <ul>
+       <li ng-repeat="victim in killBoard.killed"> {{victim.name}} ({{victim.bounty | currency}})
+       </li>
+     </ul>
+     <div class="emptyMessage" ng-if="killBoard.killed.length == 0">No kills</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
