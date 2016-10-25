@@ -7,25 +7,25 @@
 
   HitListController.$inject = ['MurderTrackerService'];
   function HitListController(MurderTrackerService) {
-    var hitList = this;
-    hitList.toKill = [{name: "Trump", bounty: 400}, {name: "Cheney", bounty: 800}, {name: "Rumsfeld", bounty: 80000}];
-    hitList.selectKill = function (index) {
-      MurderTrackerService.addKill(hitList.toKill[index]);
-      hitList.toKill.splice(index, 1);
+    var toKill = this;
+    toKill.targetList = [{name: "Trump", bounty: 400}, {name: "Cheney", bounty: 800}, {name: "Rumsfeld", bounty: 80000}];
+    toKill.kill = function (index) {
+      MurderTrackerService.addKill(toKill.targetList[index]);
+      toKill.targetList.splice(index, 1);
     }
-    hitList.addTarget = function() {
-      console.log({name: hitList.newTargetName, bounty: hitList.newTargetBounty});
-      if (isNaN(hitList.newTargetBounty)) {
-        hitList.newTargetBounty = 0;
+    toKill.addTarget = function() {
+      console.log({name: toKill.newTargetName, bounty: toKill.newTargetBounty});
+      if (isNaN(toKill.newTargetBounty)) {
+        toKill.newTargetBounty = 0;
       }
-      hitList.toKill.push({name: hitList.newTargetName, bounty: hitList.newTargetBounty});
+      toKill.targetList.push({name: toKill.newTargetName, bounty: toKill.newTargetBounty});
     }
   }
 
   KillBoardController.$inject = ["MurderTrackerService"];
   function KillBoardController(MurderTrackerService) {
     var killBoard = this;
-    killBoard.killed = MurderTrackerService.getKilledList();//[{name: "Putin", bounty: 6000}];
+    killBoard.victimList = MurderTrackerService.getKilledList();//[{name: "Putin", bounty: 6000}];
     killBoard.sumBounty = function() {
       //killBoard.bountyIncome = MurderTrackerService.getBountyIncome();
       return MurderTrackerService.getBountyIncome();

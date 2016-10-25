@@ -31,28 +31,28 @@
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6" ng-controller="HitListController as hitList">
+    <div class="col-md-6" ng-controller="HitListController as toKill">
      <h2>To Kill:</h2>
-     Enter a new target: <input ng-model="hitList.newTargetName" placeholder="Name">
-     <input ng-model="hitList.newTargetBounty" placeholder="Bounty (USD)">
-     <button ng-click="hitList.addTarget()">Add target</button>
+     Enter a new target: <input ng-model="toKill.newTargetName" placeholder="Name">
+     <input ng-model="toKill.newTargetBounty" placeholder="Bounty (USD)">
+     <button ng-click="toKill.addTarget()">Add target</button>
      <ul>
-       <li ng-repeat="hit in hitList.toKill"> {{ hit.name }} : {{ hit.bounty | currency }}
-         <button class="btn btn-default" ng-click="hitList.selectKill($index); killBoard.sumBounty();"><span class="glyphicon glyphicon-ok"></span> Kill</button>
+       <li ng-repeat="target in toKill.targetList"> {{ target.name }} : {{ target.bounty | currency }}
+         <button class="btn btn-default" ng-click="toKill.kill($index)"><span class="glyphicon glyphicon-ok"></span> Kill</button>
        </li>
      </ul>
-     <div class="emptyMessage" ng-if="hitList.toKill.length == 0">You have no targets</div>
+     <div class="emptyMessage" ng-if="toKill.targetList.length === 0">You have no targets</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6" ng-controller="KillBoardController as killBoard">
+    <div class="col-md-6" ng-controller="KillBoardController as dead">
      <h2>Slaughtered:</h2>
-     <h4>Bounty income: {{ killBoard.sumBounty() | currency }};</h4>
+     <h4>Bounty income: {{ dead.sumBounty() | currency }};</h4>
      <ul>
-       <li ng-repeat="victim in killBoard.killed"> {{victim.name}} ({{victim.bounty | currency}})
+       <li ng-repeat="victim in dead.victimList"> {{victim.name}} ({{victim.bounty | currency}})
        </li>
      </ul>
-     <div class="emptyMessage" ng-if="killBoard.killed.length == 0">No kills</div>
+     <div class="emptyMessage" ng-if="dead.victimList.length === 0">No kills</div>
     </div>
   </div>
 </div>
