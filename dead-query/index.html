@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <title>Dead Query</title>
+  </head>
+  <body ng-app="DeadQueryApp" ng-controller="QueryController as qc">
+    <h1>Test Ajax query to Archive.org</h1>
+    <h3>{{ qc.message  }}</h3>
+    <ul>
+      <li ng-repeat="show in qc.shows">{{show.date}}, {{show.coverage}}
+        <a href="http://archive.org/details/{{show.identifier}}">{{show.identifier}}</a>
+        <a href="https://archive.org/download/{{show.identifier}}/{{show.identifier}}_vbr.m3u">Playlist</a>
+      </li>
+    </ul>
+
+    {{ qc.responseData }}
+  </body>
+</html>
