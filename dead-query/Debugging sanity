@@ -1,0 +1,13 @@
+Sanity...
+
+I can put Services (as functions) in other code files which is a huge help for decomposition.
+Can I put "$inject" in that file too? I tried moving the $inject for the query service and I didn't see it working
+I moved it back. Realized it doesn't work still, but I was only testing with date. I tested with title and it worked. Will the title feature work if $inject is in the other file? time to find out.
+Turns out the question has been moot because the parameter names have been the same as the injected names (and we haven't been minimizing). Let's redo that...
+Worked when in the main app.js file...
+Works when the inject is in the decomposed file!! Yes!
+That makes my decomposition so readable.
+It seems like $inject is coming from angular.min.js, so it's ok that it's injecting into a decomposed file before reaching app.js. I can work with that.
+
+I moved displayShows to the decomposed file archivequeryservice.js. Have a weird paranoia that things got slower. Would that make any sense? The program looking around a new place for the function? I don't think so....
+It's definitely the same amount of time.

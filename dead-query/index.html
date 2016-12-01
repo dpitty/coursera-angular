@@ -3,16 +3,22 @@
   <head>
     <meta charset="utf-8">
     <script src="angular.min.js"></script>
+    <script src="dateparse.js"></script>
+    <script src="archivequeryservice.js"></script>
     <script src="app.js"></script>
     <title>Dead Query</title>
   </head>
   <body ng-app="DeadQueryApp" ng-controller="QueryController as qc">
     <h1>Test Ajax query to Archive.org</h1>
     <h3>{{ qc.message  }}</h3>
+    <input ng-model="qc.titleQuery" placeholder="Show title or venue (optional)">
+    <input ng-model="qc.dateQuery" placeholder="Year, month, or date (optional)">
+    <button ng-click="qc.displayShows()">Search</button>
+    Query completed in {{ qc.responeseTime }} ms
     <ul>
-      <li ng-repeat="show in qc.shows">{{show.date}}, {{show.coverage}}
-        <a href="http://archive.org/details/{{show.identifier}}">{{show.identifier}}</a>
-        <a href="https://archive.org/download/{{show.identifier}}/{{show.identifier}}_vbr.m3u">Playlist</a>
+      <li ng-repeat="show in qc.shows">{{show.date | date }}, {{show.coverage}}
+        <a href="http://archive.org/details/{{show.identifier}}">Show</a>
+        <a href="https://archive.org/download/{{show.identifier}}/{{show.identifier}}_vbr.m3u">M3U</a>
       </li>
     </ul>
 
