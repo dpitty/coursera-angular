@@ -11,3 +11,22 @@ It seems like $inject is coming from angular.min.js, so it's ok that it's inject
 
 I moved displayShows to the decomposed file archivequeryservice.js. Have a weird paranoia that things got slower. Would that make any sense? The program looking around a new place for the function? I don't think so....
 It's definitely the same amount of time.
+But now that I think about it... can it be a part of query service? It's kind of part of it... though it also directly modifies the controller which suggests a feature of the controller
+Let's try moving it into the service
+...
+Screw it. It's part of the controller for now. I can't let decompositon make my code more complicated that undecomposed.
+Chill. That's some beautiful decomposition. Let's commit that stuff.
+
+Now DateParse isn't working. Let's get some display in this beezee
+Cool. Got a read-out on default variables for date/day/month/year. Let's see if I can modify them when I click search.
+Making progress. Most of my old code from dateparse is good. Found out I can pick fields of a service straight out. They are not "private". That's convenient. I guess if I wanted "private" I would make a local var without attaching it to the service ("this").
+Got readouts on all fields... It would be nice to have my month read as the number and the word. Is it worth it? I can add a map... Hm.... OK.
+OK, the date parser is starting to kick ass. It still can't handle "5 sept 1990" though it can handle "sept 5 1990". I'll leave that for now. I'd rather work on instantanous display. Shoudl be a quick change. I call the update function on ng-keyup instead of ng-click
+It's looking fairly good though
+  1) I don't really want it making queries halfway through when a date is typed... No Google Instant concept here :( It's sad because I can do it from the UI perspective but the it doesn't make senes with the parsing logic.
+  2) I want to set fields back to null when date is erased... How...
+Kind of a shot in the dark but what if I set other fields to null in the location where I succesfully set dateObj to null?
+No.
+Simpler: set all to null at the top of the function. Item will re-earn values with each call. Right now this will "flicker" since I'm null-ing then re-filling the Service fields linked to the Controller fields linked to the display... It should be moot if I'm not doing an instant-on-type lookup. I can also find a more sensible way to encapsualte if needed.
+
+The date parser is looking snazzy. The decomp is a massive step up. Let's work on embedding an audio player next time.

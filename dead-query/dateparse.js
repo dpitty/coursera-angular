@@ -22,10 +22,25 @@ function DateParseService() {
     jun: 6, june : 6,
     jul: 7, july : 7,
     aug: 8, august : 8,
-    sep: 9, september : 9,
+    sep: 9, sept : 9, september : 9,
     oct: 10, october : 10,
     nov: 11, november : 11,
     dec: 12, december : 12,
+  };
+
+  var monthWordHash = {
+    0 : "January",
+    1 : "February",
+    2 : "March",
+    3 : "April",
+    4 : "May",
+    5 : "June",
+    6 : "July",
+    7 : "August",
+    8 : "September",
+    9 : "October",
+    10: "November",
+    11: "December"
   };
 
 
@@ -46,10 +61,14 @@ function DateParseService() {
 
   service.fetchDate = function(inputDate) {
     var numericMonthDate = replaceMonth(inputDate);
+    service.dateObj = null;
+    service.year = null;
+    service.month = null;
+    service.day = null;
 
     if (numericMonthDate.match(mmddyPattern)) {
       var dateObj = mmddyStringToDate(numericMonthDate);
-      console.log(dateObj);
+      //console.log(dateObj);
       if(dateObj != null && dateObj.getFullYear() > 1949 && dateObj.getFullYear() < 2050) {
         service.dateObj = dateObj;
         service.year = dateObj.getFullYear();
@@ -57,11 +76,11 @@ function DateParseService() {
         service.day = dateObj.getDate();
       }
       else {
-        service.dateObj = null;
+        //service.dateObj = null;
       }
     } else {
-      var fourDigitYearMatch = service.inputDate.match(/\d\d\d\d/);
-      var monthMatch = service.inputDate.match(monthPattern);
+      var fourDigitYearMatch = inputDate.match(/\d\d\d\d/);
+      var monthMatch = inputDate.match(monthPattern);
 
       console.log(fourDigitYearMatch);
       if (fourDigitYearMatch && fourDigitYearMatch[0] > 1949 && fourDigitYearMatch[0] < 2050) {
@@ -73,7 +92,7 @@ function DateParseService() {
       if (monthMatch) {
         service.month = monthHash[monthMatch[0]] - 1;
         if(monthMatch != null) {
-          var twoDigitYearMatch = service.inputDate.match(/\d\d/);
+          var twoDigitYearMatch = inputDate.match(/\d\d/);
           if (twoDigitYearMatch != null) {
             if (twoDigitYearMatch[0] > 49) service.year = "19" + twoDigitYearMatch[0];
             else if (twoDigitYearMatch[0] < 20) service.year = "20" + twoDigitYearMatch[0];
@@ -81,5 +100,10 @@ function DateParseService() {
         }
       }
     }
+  }
+
+  service.getMonthWord = function(number) {
+    if (number < 0 || number > 11) return "--invalid--";
+    return monthWordHash[number];
   }
 }

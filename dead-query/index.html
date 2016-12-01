@@ -12,9 +12,13 @@
     <h1>Test Ajax query to Archive.org</h1>
     <h3>{{ qc.message  }}</h3>
     <input ng-model="qc.titleQuery" placeholder="Show title or venue (optional)">
-    <input ng-model="qc.dateQuery" placeholder="Year, month, or date (optional)">
-    <button ng-click="qc.displayShows()">Search</button>
-    Query completed in {{ qc.responeseTime }} ms
+    <input ng-model="qc.dateQuery" ng-keyup="qc.parseDate()" placeholder="Year, month, or date (optional)">
+    <button ng-click="qc.displayShows(); qc.parseDate()">Search</button>
+    Query completed in{{ qc.responeseTime }} ms
+    <br/>Full Date: {{ qc.fullDate || "--null--" }}
+    <br/>Month: {{ qc.month || "--null--" }} ({{ qc.monthWord }})
+    <br/>Day: {{ qc.day || "--null--" }}
+    <br/>Year: {{ qc.year || "--null--" }}
     <ul>
       <li ng-repeat="show in qc.shows">{{show.date | date }}, {{show.coverage}}
         <a href="http://archive.org/details/{{show.identifier}}">Show</a>

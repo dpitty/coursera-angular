@@ -33,6 +33,19 @@
         return null;
       });
     }
+    qc.fullDate = null;
+    qc.day = null;
+    qc.month = null;
+    qc.year = null;
+    qc.parseDate = function() {
+      DateParseService.fetchDate(qc.dateQuery);
+      qc.fullDate = DateParseService.dateObj;
+      qc.day = DateParseService.day;
+      qc.month = DateParseService.month;
+      qc.monthWord = DateParseService.getMonthWord(qc.month);
+      qc.year = DateParseService.year;
+    }
+
   }
 
 })();
